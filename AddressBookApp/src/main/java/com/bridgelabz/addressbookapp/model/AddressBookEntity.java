@@ -1,5 +1,7 @@
 package com.bridgelabz.addressbookapp.model;
 
+import com.bridgelabz.addressbookapp.dto.AddressBookDTO;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,15 +33,25 @@ public class AddressBookEntity {
         this.country = country;
     }
 
-    public AddressBookEntity(AddressBookEntity contactObj) {
-        this.id=contactObj.getId();
-        this.fullName=contactObj.getFullName();
-        this.phoneNumber=contactObj.getPhoneNumber();
-        this.address=contactObj.getAddress();
-        this.city=contactObj.getCity();
-        this.state=contactObj.getState();
-        this.zip=contactObj.getZip();
-        this.email=contactObj.getEmail();
+//    public AddressBookEntity(AddressBookDTO dtoContactObj) {
+//        this.id=dtoContactObj.getId();
+//        this.fullName=dtoContactObj.getFullName();
+//        this.phoneNumber=dtoContactObj.getPhoneNumber();
+//        this.address=dtoContactObj.getAddress();
+//        this.city=dtoContactObj.getCity();
+//        this.state=dtoContactObj.getState();
+//        this.zip=dtoContactObj.getZip();
+//        this.email=dtoContactObj.getEmail();
+//    }
+
+    public AddressBookEntity(AddressBookDTO dtoContactObj) {
+        this.fullName=dtoContactObj.getFullName();
+        this.phoneNumber=dtoContactObj.getPhoneNumber();
+        this.address=dtoContactObj.getAddress();
+        this.city=dtoContactObj.getCity();
+        this.state=dtoContactObj.getState();
+        this.zip=dtoContactObj.getZip();
+        this.email=dtoContactObj.getEmail();
     }
 
     public int getId() {

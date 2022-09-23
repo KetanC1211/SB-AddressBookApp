@@ -1,4 +1,6 @@
 package com.bridgelabz.addressbookapp.service;
+import com.bridgelabz.addressbookapp.dto.AddressBookDTO;
+import com.bridgelabz.addressbookapp.dto.ResponseDTO;
 import com.bridgelabz.addressbookapp.model.AddressBookEntity;
 import com.bridgelabz.addressbookapp.repository.AddressBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,25 +9,29 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AddressBookService {
 
+public class AddressBookService implements IAddressBookService {
     @Autowired
     AddressBookRepository repository;
-
-    public List<AddressBookEntity> getAllContacts() {
+    @Override
+    public List<AddressBookEntity> listAllContact() {
         return repository.findAll();
     }
 
-    public AddressBookEntity saveContact(AddressBookEntity entity) {
-        repository.save(entity);
-        return entity;
+    @Override
+    public AddressBookEntity saveContact(AddressBookDTO dtoContactObj) {
+        AddressBookEntity entiyContactObj = new AddressBookEntity(dtoContactObj);
+        repository.save(entiyContactObj);
+        return entiyContactObj;
     }
 
+    @Override
     public AddressBookEntity getContactByID(Integer id) {
         return repository.findById(id).get();
     }
 
-    public String deleteContactByID(Integer id) {
+    @Override
+    public String deleteContactById(Integer id) {
         if(repository.findById(id).isPresent()) {
             repository.deleteById(id);
             return "deleted";
@@ -34,14 +40,18 @@ public class AddressBookService {
         }
     }
 
-    public String updateContactById(Integer id, AddressBookEntity contactObj) {
+
+    @Override
+    public String updateByID(Integer id, AddressBookDTO contactObj) {
         if(repository.findById(id).isPresent()) {
-            contactObj.setId(id);
             AddressBookEntity newContact = new AddressBookEntity(contactObj);
-            repository.save(contactObj);
+            newContact.setId(id);
+            repository.save(newContact);
             return "Updated Successfully";
         }else {
             return "Record not found";
         }
     }
+
+
 }
