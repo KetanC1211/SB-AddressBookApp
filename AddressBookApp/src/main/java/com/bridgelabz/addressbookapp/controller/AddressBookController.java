@@ -52,4 +52,9 @@ public class AddressBookController {
         ResponseDTO responseDTO=new ResponseDTO("Updated "+id+" ...", message );
         return new ResponseEntity<>(responseDTO,HttpStatus.OK);
     }
+    @GetMapping("/sortByName")
+    public ResponseEntity<ResponseDTO> sortByName(){
+        ResponseDTO responseDTO=new ResponseDTO("Sorted By Name", iAddressBookService.sortByName());
+        return new ResponseEntity(responseDTO , HttpStatus.OK);
+    }
 }

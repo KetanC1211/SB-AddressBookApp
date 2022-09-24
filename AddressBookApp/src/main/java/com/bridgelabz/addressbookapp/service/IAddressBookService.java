@@ -15,4 +15,6 @@ public interface IAddressBookService {
     String deleteContactById(Integer id);
 
     String updateByID(Integer id, AddressBookDTO contactObj);
+
+    List<AddressBookEntity> sortByName();
 }

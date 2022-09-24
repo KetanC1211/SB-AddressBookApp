@@ -53,5 +53,9 @@ public class AddressBookService implements IAddressBookService {
         }
     }
 
+    @Override
+    public List<AddressBookEntity> sortByName() {
+        return repository.findAllByOrderByFullName();
+    }
 
 }
