@@ -26,9 +26,8 @@ public class AddressBookController {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<AddressBookEntity> getContacts(){
-        List<AddressBookEntity> contactObj = iAddressBookService.listAllContact();
-        ResponseDTO responseDTO=new ResponseDTO("Display of All Contact", (AddressBookEntity) contactObj);
+    public ResponseEntity<ResponseDTO> getContacts(){
+        ResponseDTO responseDTO=new ResponseDTO("Display of All Contact", iAddressBookService.listAllContact());
         return new ResponseEntity(responseDTO , HttpStatus.OK);
     }
 
