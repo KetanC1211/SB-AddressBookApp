@@ -10,6 +10,7 @@ public class AddressBookAppApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(AddressBookAppApplication.class, args);
+        log.info("Address Book App Started");
     }
 
 }
