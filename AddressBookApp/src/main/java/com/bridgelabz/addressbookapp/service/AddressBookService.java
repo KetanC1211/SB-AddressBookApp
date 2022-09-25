@@ -1,15 +1,13 @@
 package com.bridgelabz.addressbookapp.service;
+
 import com.bridgelabz.addressbookapp.dto.AddressBookDTO;
-import com.bridgelabz.addressbookapp.dto.ResponseDTO;
 import com.bridgelabz.addressbookapp.model.AddressBookEntity;
 import com.bridgelabz.addressbookapp.repository.AddressBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
-
 public class AddressBookService implements IAddressBookService {
     @Autowired
     AddressBookRepository repository;
@@ -58,4 +56,21 @@ public class AddressBookService implements IAddressBookService {
         return repository.findAllByOrderByFullName();
     }
 
+    @Override
+    public List<AddressBookEntity> searchByCity(String city) {
+        return repository.findByCity(city);
+    }
+    @Override
+    public List<AddressBookEntity> searchByState(String state) {
+        return repository.findByState(state);
+    }
+
+    @Override
+    public List<AddressBookEntity> findAllByOrderByCity() {
+        return repository.findAllByOrderByCity();
+    }
+    @Override
+    public List<AddressBookEntity> searchPersonByPhone(String phoneNumber) {
+        return repository.findByPhoneNumber(phoneNumber);
+    }
 }

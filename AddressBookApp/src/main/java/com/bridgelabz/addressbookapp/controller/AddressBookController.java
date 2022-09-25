@@ -57,4 +57,26 @@ public class AddressBookController {
         ResponseDTO responseDTO=new ResponseDTO("Sorted By Name", iAddressBookService.sortByName());
         return new ResponseEntity(responseDTO , HttpStatus.OK);
     }
+
+    @GetMapping("/searchByCity/{city}")
+    public ResponseEntity<ResponseDTO> searchPersonByCity(@PathVariable String city){
+        ResponseDTO responseDTO=new ResponseDTO("Sorted By Name", iAddressBookService.searchByCity(city));
+        return new ResponseEntity(responseDTO , HttpStatus.OK);
+    }
+    @GetMapping("/searchByState/{state}")
+    public ResponseEntity<ResponseDTO> searchPersonByState(@PathVariable String state){
+        ResponseDTO responseDTO=new ResponseDTO("Sorted By Name", iAddressBookService.searchByState(state));
+        return new ResponseEntity(responseDTO , HttpStatus.OK);
+    }
+    @GetMapping("/sortByCity")
+    public ResponseEntity<ResponseDTO> findAllByOrderByCity(){
+        ResponseDTO responseDTO=new ResponseDTO("Sorted By City ", iAddressBookService.findAllByOrderByCity());
+        return new ResponseEntity(responseDTO , HttpStatus.OK);
+    }
+
+    @GetMapping("/searchByPhoneNumber/{phoneNumber}")
+    public ResponseEntity<ResponseDTO> searchPersonByPhone(@PathVariable String phoneNumber){
+        ResponseDTO responseDTO=new ResponseDTO("Search By Phone Number", iAddressBookService.searchPersonByPhone(phoneNumber));
+        return new ResponseEntity(responseDTO , HttpStatus.OK);
+    }
 }

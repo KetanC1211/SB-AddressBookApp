@@ -17,4 +17,10 @@ public interface IAddressBookService {
     String updateByID(Integer id, AddressBookDTO contactObj);
 
     List<AddressBookEntity> sortByName();
+
+    List<AddressBookEntity> searchByCity(String city);
+    List<AddressBookEntity> searchByState(String city);
+    List<AddressBookEntity> findAllByOrderByCity();
+
+    List<AddressBookEntity> searchPersonByPhone(String phoneNumber);
 }
