@@ -1,9 +1,11 @@
 package com.bridgelabz.addressbookapp.service;
 
 import com.bridgelabz.addressbookapp.dto.AddressBookDTO;
+import com.bridgelabz.addressbookapp.exception.AddressBookCustomException;
 import com.bridgelabz.addressbookapp.model.AddressBookEntity;
 import com.bridgelabz.addressbookapp.repository.AddressBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -17,7 +19,13 @@ public class AddressBookService implements IAddressBookService {
     }
 
     @Override
-    public AddressBookEntity saveContact(AddressBookDTO dtoContactObj) {
+    public Object saveContact(AddressBookDTO dtoContactObj) {
+        List<AddressBookEntity> contactList = repository.findAll();
+        for(AddressBookEntity p :contactList){
+            if(p.getFullName().equals(dtoContactObj.getFullName())){
+                return  "Name already exit enter new name";
+            }
+        }
         AddressBookEntity entiyContactObj = new AddressBookEntity(dtoContactObj);
         repository.save(entiyContactObj);
         return entiyContactObj;
@@ -25,7 +33,7 @@ public class AddressBookService implements IAddressBookService {
 
     @Override
     public AddressBookEntity getContactByID(Integer id) {
-        return repository.findById(id).get();
+        return repository.findById(id).orElseThrow(()-> new AddressBookCustomException("Contact not found for "+id+" in reords"));
     }
 
     @Override
@@ -42,6 +50,12 @@ public class AddressBookService implements IAddressBookService {
     @Override
     public String updateByID(Integer id, AddressBookDTO contactObj) {
         if(repository.findById(id).isPresent()) {
+            List<AddressBookEntity> contactList = repository.findAll();
+            for(AddressBookEntity p :contactList){
+                if(p.getFullName().equals(contactObj.getFullName())){
+                    return  "Name already exit enter new name";
+                }
+            }
             AddressBookEntity newContact = new AddressBookEntity(contactObj);
             newContact.setId(id);
             repository.save(newContact);

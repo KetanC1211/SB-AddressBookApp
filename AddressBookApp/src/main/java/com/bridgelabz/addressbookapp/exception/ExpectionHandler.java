@@ -22,4 +22,10 @@ public class ExpectionHandler {
         ResponseDTO responseDTO = new ResponseDTO("Expection while processing Rest api",errorMessage);
         return new ResponseEntity<> (responseDTO,HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(AddressBookCustomException.class)
+    public ResponseEntity<ResponseDTO> handleMethodArgumentNotValidException(AddressBookCustomException exception){
+        ResponseDTO responseDTO = new ResponseDTO("Expection while processing Rest Request",exception.getMessage());
+        return new ResponseEntity<ResponseDTO> (responseDTO,HttpStatus.BAD_REQUEST);
+    }
+
 }

@@ -8,9 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
-import java.util.List;
+
 
 @RestController
 @RequestMapping("/contact")
@@ -22,8 +21,8 @@ public class AddressBookController {
 
     @PostMapping("/save")
     public ResponseEntity<AddressBookEntity> save(@Valid @RequestBody AddressBookDTO obj){
-        AddressBookEntity contactObj = iAddressBookService.saveContact(obj);
-        ResponseDTO responseDTO =new ResponseDTO("Employee added successfully", contactObj);
+        Object contactObj = iAddressBookService.saveContact(obj);
+        ResponseDTO responseDTO =new ResponseDTO("Adding employee", contactObj);
         return new ResponseEntity(responseDTO , HttpStatus.OK);
     }
 
@@ -49,7 +48,7 @@ public class AddressBookController {
     @PutMapping("/update/{id}")
     public ResponseEntity<ResponseDTO> updateById(@Valid @RequestBody AddressBookDTO contactDto, @PathVariable Integer id){
         String message = iAddressBookService.updateByID(id,contactDto);
-        ResponseDTO responseDTO=new ResponseDTO("Updated "+id+" ...", message );
+        ResponseDTO responseDTO=new ResponseDTO("Updating .... "+id+" ...", message );
         return new ResponseEntity<>(responseDTO,HttpStatus.OK);
     }
     @GetMapping("/sortByName")

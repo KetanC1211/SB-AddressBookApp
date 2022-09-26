@@ -8,7 +8,7 @@ import java.util.List;
 public interface IAddressBookService {
     List<AddressBookEntity> listAllContact();
 
-    AddressBookEntity saveContact(AddressBookDTO dtoContactObj);
+    Object saveContact(AddressBookDTO dtoContactObj);
 
     AddressBookEntity getContactByID(Integer id);
 
